@@ -17,11 +17,22 @@ const EditProduct = () => {
     navigate("/products");
   };
 
-  if (!product) return <p className="text-sm text-teal-900/60">Loading product...</p>;
+  if (!product) {
+    return (
+      <div className="mx-auto max-w-2xl space-y-5">
+        <div className="h-8 w-56 animate-pulse rounded bg-porcelain" />
+        <div className="h-64 w-full animate-pulse rounded-panel bg-porcelain" />
+        <div className="h-40 w-full animate-pulse rounded-panel bg-porcelain" />
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-bold text-teal-950">Edit product</h2>
+      <div className="mb-9">
+        <h2 className="font-display text-[28px] leading-tight text-ink">{product.name}</h2>
+        <p className="mt-1 text-[14px] text-ink/50">{product.handle}</p>
+      </div>
       <ProductForm initial={product} onSubmit={handleUpdate} submitLabel="Save changes" />
     </div>
   );

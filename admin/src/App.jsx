@@ -8,10 +8,20 @@ import ProductList from "./pages/ProductList.jsx";
 import AddProduct from "./pages/AddProduct.jsx";
 import EditProduct from "./pages/EditProduct.jsx";
 
+/**
+ * The frame is pinned to the viewport and only the content column scrolls.
+ *
+ * Previously the whole page scrolled while the sidebar was `h-screen`, so as
+ * soon as a page ran past one screen the sidebar scrolled away and left the
+ * page background showing beside the content.
+ */
 const Layout = ({ children }) => (
-  <div className="flex min-h-screen">
+  <div className="flex h-screen overflow-hidden bg-kaolin">
     <Sidebar />
-    <main className="flex-1 overflow-y-auto p-8">{children}</main>
+    {/* min-w-0 lets the table inside shrink instead of forcing the page wide */}
+    <main className="min-w-0 flex-1 overflow-y-auto">
+      <div className="mx-auto max-w-6xl px-8 py-9 xl:px-10">{children}</div>
+    </main>
   </div>
 );
 

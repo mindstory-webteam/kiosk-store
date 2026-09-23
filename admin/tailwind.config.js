@@ -1,25 +1,26 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: "#12221f",
-        teal: {
-          950: "#0b1f1c",
-          900: "#12322c",
-          800: "#194339",
-          700: "#215647",
-          600: "#2b6e58",
-        },
-        amber: {
-          500: "#e0973f",
-          600: "#c97f2b",
-        },
-        cloud: "#f3f1ea",
+        /* Same materials as the storefront, so the two halves of the product
+           read as one system. */
+        kaolin: "#E5E1D8",    // page ground
+        porcelain: "#F6F4F0", // panels and inputs
+        ink: "#171E1B",       // text, sidebar, primary buttons
+        cobalt: "#22407A",    // primary action + focus
+        celadon: "#A9BEB1",   // "active"/healthy marks
+        rule: "#CFC8BB",      // hairlines and borders
+        clay: "#8C4A3F",      // destructive actions — a fired-clay red
+        cloud: "#F7F6F2",     // kept: referenced by existing styles
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Newsreader", "Georgia", "serif"],
+        sans: ["Archivo", "system-ui", "-apple-system", "sans-serif"],
+      },
+      borderRadius: {
+        panel: "3px",
       },
     },
   },

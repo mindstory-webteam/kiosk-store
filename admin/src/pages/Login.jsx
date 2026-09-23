@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { btnPrimary, field, label } from "../ui";
 
 const Login = () => {
   const { login, loading, error } = useAuth();
@@ -15,46 +16,50 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-teal-950 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-2xl border border-teal-800 bg-teal-900 p-8 shadow-xl"
-      >
-        <p className="text-xs uppercase tracking-widest text-amber-500">Kiosk Stores</p>
-        <h1 className="mb-6 text-2xl font-bold text-cloud">Admin login</h1>
+    <div className="flex min-h-screen items-center justify-center bg-kaolin px-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm">
+        <p className="font-display text-[26px] leading-tight text-ink">Kiosk Stores</p>
+        <p className="mt-1 text-[14px] text-ink/50">Sign in to manage stock and the catalogue.</p>
 
-        {error && (
-          <div className="mb-4 rounded-md bg-red-500/10 px-3 py-2 text-sm text-red-300">{error}</div>
-        )}
+        <div className="mt-8 rounded-panel border border-rule bg-porcelain p-7">
+          {error && (
+            <div
+              role="alert"
+              className="mb-5 rounded-panel border border-clay/30 bg-clay/5 px-3 py-2 text-[13px] text-clay"
+            >
+              {error}
+            </div>
+          )}
 
-        <label className="mb-1 block text-xs font-medium text-cloud/70">Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="mb-4 w-full rounded-md border border-teal-700 bg-teal-950 px-3 py-2 text-cloud outline-none focus:border-amber-500"
-        />
+          <label htmlFor="email" className={label}>Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="username"
+            className={`${field} mb-5`}
+          />
 
-        <label className="mb-1 block text-xs font-medium text-cloud/70">Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="mb-6 w-full rounded-md border border-teal-700 bg-teal-950 px-3 py-2 text-cloud outline-none focus:border-amber-500"
-        />
+          <label htmlFor="password" className={label}>Password</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="current-password"
+            className={`${field} mb-7`}
+          />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-md bg-amber-500 px-4 py-2.5 font-semibold text-teal-950 transition hover:bg-amber-600 disabled:opacity-60"
-        >
-          {loading ? "Signing in..." : "Sign in"}
-        </button>
+          <button type="submit" disabled={loading} className={`${btnPrimary} w-full py-3`}>
+            {loading ? "Signing in..." : "Sign in"}
+          </button>
+        </div>
 
-        <p className="mt-4 text-center text-xs text-cloud/50">
-          Default seed account: admin@kiosk.com / Admin@123
+        <p className="mt-5 text-center text-[12px] text-ink/40">
+          Seed account: admin@kiosk.com / Admin@123
         </p>
       </form>
     </div>

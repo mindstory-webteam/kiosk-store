@@ -1,16 +1,67 @@
+/* Fonts first — @import must precede the Tailwind directives. */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Plain CSS rather than @apply: a missing token here would fail the whole
+   stylesheet, while the same colours used as utility classes elsewhere just
+   quietly do nothing. */
 body {
-  @apply bg-cloud text-ink;
+  background-color: #e5e1d8; /* kaolin */
+  color: #171e1b; /* ink */
+  font-family: Archivo, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prices, stock counts and dashboard figures line up column-wise. */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: #22407a;
+  color: #f6f4f0;
+}
+
+/* Keyboard users get a visible ring; mouse users don't. */
+:focus-visible {
+  outline: 2px solid #22407a;
+  outline-offset: 2px;
+}
+
+/* Strip the spinner arrows from stock fields — they invite mis-clicks in a
+   table where a stray scroll would change inventory. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
-  background: #21564733;
+  background: #cfc8bb;
   border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5ad9e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

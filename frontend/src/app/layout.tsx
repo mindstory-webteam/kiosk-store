@@ -1,19 +1,39 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Newsreader, Archivo } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+// Product names and prices. Optical sizing keeps it readable small and
+// characterful large; the italic is used once, in the headline.
+const display = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+// Everything else: labels, buttons, body copy, form controls.
+const sans = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Kiosk Stores",
-  description: "Browse products from kiosk stores near you",
+  title: {
+    default: "Kiosk Stores — ceramics for coffee and tea",
+    template: "%s · Kiosk Stores",
+  },
+  description:
+    "Cups, pots and saucers from kiosks near you, with stock counts taken straight off the shelf.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="font-sans">
         <AuthProvider>
           <Navbar />

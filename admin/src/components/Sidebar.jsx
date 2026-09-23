@@ -3,38 +3,57 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 
 const linkClass = ({ isActive }) =>
-  `block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-    isActive ? "bg-amber-500 text-teal-950" : "text-cloud/80 hover:bg-teal-800 hover:text-cloud"
+  `relative block py-2.5 pl-5 pr-4 text-[14px] transition-colors ${
+    isActive
+      ? "bg-porcelain/10 text-porcelain"
+      : "text-porcelain/55 hover:bg-porcelain/5 hover:text-porcelain"
   }`;
+
+// A rule in the margin marks the current page — quieter than a filled pill,
+// and it leaves the label itself undecorated.
+const Marker = ({ isActive }) =>
+  isActive ? (
+    <span aria-hidden className="absolute inset-y-0 left-0 w-[2px] bg-celadon" />
+  ) : null;
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
 
+  const items = [
+    { to: "/", end: true, label: "Dashboard" },
+    { to: "/products", end: false, label: "Products" },
+    { to: "/products/new", end: false, label: "Add product" },
+  ];
+
   return (
-    <aside className="flex h-screen w-64 flex-col justify-between bg-teal-950 px-4 py-6">
-      <div>
-        <div className="mb-8 px-2">
-          <p className="text-xs uppercase tracking-widest text-amber-500">Kiosk Stores</p>
-          <h1 className="text-lg font-bold text-cloud">Admin Panel</h1>
-        </div>
-        <nav className="space-y-1">
-          <NavLink to="/" end className={linkClass}>
-            Dashboard
-          </NavLink>
-          <NavLink to="/products" className={linkClass}>
-            Products
-          </NavLink>
-          <NavLink to="/products/new" className={linkClass}>
-            Add Product
-          </NavLink>
-        </nav>
+    // h-full, not h-screen: the parent frame owns the viewport height, so the
+    // sidebar fills it exactly and never scrolls with the content.
+    <aside className="flex h-full w-60 shrink-0 flex-col bg-ink">
+      <div className="shrink-0 border-b border-porcelain/10 px-5 py-6">
+        <p className="font-display text-[19px] leading-none text-porcelain">Kiosk Stores</p>
+        <p className="mt-1.5 text-[12px] text-porcelain/40">Stock and catalogue</p>
       </div>
-      <div className="rounded-lg bg-teal-900 p-3">
-        <p className="truncate text-sm font-medium text-cloud">{user?.name}</p>
-        <p className="truncate text-xs text-cloud/60">{user?.email}</p>
+
+      {/* takes the slack, so the account block stays pinned to the bottom */}
+      <nav className="flex-1 overflow-y-auto py-3">
+        {items.map((item) => (
+          <NavLink key={item.to} to={item.to} end={item.end} className={linkClass}>
+            {({ isActive }) => (
+              <>
+                <Marker isActive={isActive} />
+                {item.label}
+              </>
+            )}
+          </NavLink>
+        ))}
+      </nav>
+
+      <div className="shrink-0 border-t border-porcelain/10 px-5 py-5">
+        <p className="truncate text-[14px] text-porcelain">{user?.name}</p>
+        <p className="truncate text-[12px] text-porcelain/40">{user?.email}</p>
         <button
           onClick={logout}
-          className="mt-3 w-full rounded-md bg-teal-800 px-3 py-1.5 text-xs font-semibold text-cloud hover:bg-teal-700"
+          className="mt-4 text-[13px] text-porcelain/55 underline-offset-[5px] transition-colors hover:text-porcelain hover:underline"
         >
           Log out
         </button>
