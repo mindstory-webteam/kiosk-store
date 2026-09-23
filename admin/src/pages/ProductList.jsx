@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../api/axios";
 import { useSocket } from "../context/SocketContext.jsx";
 import ProductImportExport from "../components/ProductImportExport.jsx";
-import { btnDanger, btnPrimary, field } from "../ui";
+import { btnDanger, btnPrimary, field } from "../Ui.js";
 
 const STATUS_STYLES = {
   active: "bg-celadon/35 text-ink",

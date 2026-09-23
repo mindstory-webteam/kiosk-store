@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import { btnPrimary, field, label } from "../ui";
+import { btnPrimary, field, label } from "../Ui";
 
 const emptySize = { label: "", stock: 0, sku: "", price: "" };
 

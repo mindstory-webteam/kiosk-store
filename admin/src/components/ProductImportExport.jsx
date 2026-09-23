@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import api, { downloadFile } from "../api/axios";
-import { btnGhost, btnPrimary, btnQuiet, field, label } from "../ui";
+import { btnGhost, btnPrimary, btnQuiet, field, label } from "../Ui";
 
 const MODES = [
   { value: "upsert", label: "Add new + update existing" },

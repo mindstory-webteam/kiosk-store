@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
 import { useSocket } from "../context/SocketContext.jsx";
-import { btnPrimary } from "../ui";
+import { btnPrimary } from "../Ui.js";
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-import { btnPrimary, field, label } from "../ui";
+import { btnPrimary, field, label } from "../Ui.js";
 
 const Login = () => {
   const { login, loading, error } = useAuth();
